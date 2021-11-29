@@ -9,10 +9,13 @@ $GLOBALS['db_conf']['db_pass'] = "";
 $GLOBALS['db_conf']['db_charset'] = "utf8";
 
 
-
+//include classes
 require("classes/class.database.php");
 require("classes/class.text.php");
 require("classes/class.log.php");
+
+//include libraries
+require("libraries/simple_html_dom.php");
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS");
