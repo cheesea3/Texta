@@ -1,4 +1,8 @@
 <?php
+
+
+use Nesk\Puphpeteer\Puppeteer;
+    use Nesk\Rialto\Data\JsFunction;
 class Text {
 
 public function sendText($destination, $msg, $amount){
@@ -16,6 +20,28 @@ public function sendText($destination, $msg, $amount){
 		return $randomString;
 	}
 
+
+$puppeteer = new Puppeteer;
+$browser = $puppeteer->launch();
+
+$page = $browser->newPage();
+$page->goto('https://www.hlrlookup.com/');
+$page->type('#msisdnfield', $destination);
+$page->waitForSelector('button[id="lookup-button"]');
+$page->click('button[id="lookup-button"]');
+
+$data = $page->evaluate(JsFunction::createWithBody('
+document.getElementById("msisdnfield").value = '.$destination.';
+document.getElementById("lookup-button").click();
+return document.documentElement.outerHTML;'));
+echo $data;
+$browser->close();
+
+echo "Arwferw";
+die();
+
+
+
 	while ($amount != $count) {
 		$tld = array("com", "org", "net");	
 		//more obfuscation
@@ -30,12 +56,7 @@ public function sendText($destination, $msg, $amount){
 		} else {
 			//kill loop
 			
-			$html = file_get_html('http://www.google.com/');
-$title = $html->find('title', 0);
-$image = $html->find('img', 0);
 
-echo $title->plaintext."<br>\n";
-echo $image->src;
 			http_response_code(400);
 			die('{ Error: "Messages cannot deliver!" }');
 		}

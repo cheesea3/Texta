@@ -1,0 +1,13 @@
+{
+    "name": "dijaz/backend",
+    "authors": [
+        {
+            "name": "PRIVATE DI",
+            "email": "3193289+cheesea3@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "nesk/puphpeteer": "^2.0",
+        "sunra/php-simple-html-dom-parser": "^1.5"
+    }
+}

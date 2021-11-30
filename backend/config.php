@@ -1,4 +1,5 @@
 <?php
+include("vendor/autoload.php");
 
 //database details
 $GLOBALS['db_conf']['db_host'] = "127.0.0.1";
@@ -9,13 +10,13 @@ $GLOBALS['db_conf']['db_pass'] = "";
 $GLOBALS['db_conf']['db_charset'] = "utf8";
 
 
+
 //include classes
 require("classes/class.database.php");
 require("classes/class.text.php");
 require("classes/class.log.php");
 
-//include libraries
-require("libraries/simple_html_dom.php");
+
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS");
@@ -29,6 +30,7 @@ if ($method == "OPTIONS")
     header("HTTP/1.1 200 OK");
     die();
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] == "GET"){
 require("endpoints/get/routes.php");
