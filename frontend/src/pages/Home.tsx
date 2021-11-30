@@ -3,6 +3,8 @@ import { useState } from 'react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 import axios from 'axios';
+import {decode} from 'html-entities';
+
 
 const Home: React.FC = () => {
   const [msg, setMsg] = useState<string>();
@@ -74,28 +76,37 @@ const Home: React.FC = () => {
         <IonList>
           <IonItem>
           {error && !number ? <IonLabel color="danger" position="floating">Number</IonLabel>: <IonLabel position="floating">Number</IonLabel>}
-            <IonInput  type="number" value={number} placeholder="Enter Phone Number" onIonChange={e => setNumber(parseInt(e.detail.value!, 10))}></IonInput>
+            <IonInput  type="number" inputmode="numeric" value={number} placeholder="Enter Phone Number" onIonChange={e => setNumber(parseInt(e.detail.value!, 10))}></IonInput>
           </IonItem>
           <IonItem>
           {error && !carrier ? <IonLabel color="danger">Carrier</IonLabel>: <IonLabel>Carrier</IonLabel>}
           <IonSelect interface="popover" onIonChange={e => setCarrier(e.detail.value)}>
-            <IonSelectOption value="tmomail.net">T-Mobile</IonSelectOption>
-            <IonSelectOption value="verizon">Verizon</IonSelectOption>
-            <IonSelectOption value="n64">MetroPCS</IonSelectOption>
+            <IonSelectOption value="vzwpix.com">Verizon</IonSelectOption>
+            <IonSelectOption value="myboostmobile.com">Boost Mobile</IonSelectOption>
+            <IonSelectOption value="pm.sprint.com">Sprint</IonSelectOption>
+            <IonSelectOption value="tmomail.net">T-Mobile</IonSelectOption>            
+            <IonSelectOption value="mmst5.tracfone.com">Tracfone</IonSelectOption>
+            <IonSelectOption value="msg.fi.google.com">Google Fi</IonSelectOption>
+            <IonSelectOption value="vmpix.com">Virgin Mobile</IonSelectOption>
+            <IonSelectOption value="mms.cricketwireless.net">Cricket</IonSelectOption>
+            <IonSelectOption value="mypixmessages.com">xFinity Mobile</IonSelectOption>
+            <IonSelectOption value="mms.att.net">AT{decode('&amp;')}T</IonSelectOption>
+            <IonSelectOption value="mymetropcs.com">MetroPCS</IonSelectOption>
+            <IonSelectOption value="mailmymobile.ne">Mint Mobile</IonSelectOption>
           </IonSelect>
         </IonItem>          
           <IonItem >
             {error && !amount ? <IonLabel color="danger" position="floating">Amount</IonLabel>: <IonLabel position="floating">Amount</IonLabel>}
-            <IonInput  type="number" required={true} inputmode="numeric" value={amount} placeholder="Enter Amount To Send" onIonChange={e => setAmount(parseInt(e.detail.value!, 10))}></IonInput>
+            <IonInput  type="number" required={true} value={amount} placeholder="Enter Amount To Send" onIonChange={e => setAmount(parseInt(e.detail.value!, 10))}></IonInput>
           </IonItem>
           <IonItem>
           {error && !msg ? <IonLabel color="danger" position="floating">Msg</IonLabel>: <IonLabel position="floating">Msg</IonLabel>}
             <IonTextarea spellcheck={true} required={true} value={msg}  onIonChange={e => setMsg(e.detail.value!)}></IonTextarea>
           </IonItem>
-<div className="flex justify-between p-2">
-<div className=""><IonButton fill="clear" type="reset" onClick={e => (resetOptions())}>Clear</IonButton></div>
+<div className="flex justify-between m-2">
+<div className=""><IonButton fill="clear" type="button" onClick={e => (resetOptions())}>Clear</IonButton></div>
 
-<div className=""><IonButton fill="solid" type="submit" strong={true} onClick={e => (submitText())}>Submit</IonButton></div>
+<div className=""><IonButton fill="solid" type="button" strong={true} onClick={e => (submitText())}>Submit</IonButton></div>
         </div>
         </IonList>
       </IonContent>
