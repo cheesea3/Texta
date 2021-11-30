@@ -1,5 +1,4 @@
 <?php
-include("vendor/autoload.php");
 
 //database details
 $GLOBALS['db_conf']['db_host'] = "127.0.0.1";

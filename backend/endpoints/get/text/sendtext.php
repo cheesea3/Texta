@@ -11,16 +11,23 @@
 			if(filter_var($destination, FILTER_VALIDATE_EMAIL)) {
 				//word wrap msg just in case
 				$msg = wordwrap($msg,70);
+				if($amount > 30){
+                echo '{ Error: "Amount exceeds limit" }';
+                http_response_code(401);					
+					die();
+				}
 				Text::sendText($destination, $msg, $amount);
 				//return result
                 echo '{ "Status": "Success" }';
                 http_response_code(200);
+				die();
 			}
             else
             {
 				//return error reason
-                echo '{ Error: "Invalid Destination }';
+                echo '{ Error: "Invalid Destination" }';
                 http_response_code(400);
+				die();
             }
         }
         else
